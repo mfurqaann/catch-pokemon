@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, map, mergeMap, tap } from 'rxjs';
 import { EndpointConstant } from 'src/app/common/constant/endpoint.constant';
 import { Pokemon } from './pokemon.model';
 
@@ -8,11 +8,18 @@ import { Pokemon } from './pokemon.model';
 export class PokemonService {
   constructor(private http: HttpClient) {}
 
-  fetch(): Observable<any> {
-    return this.http.get(EndpointConstant.POKEMON_URL).pipe(
+  fetch(): Observable<Array<Pokemon>> {
+    return this.http.get<Array<Pokemon>>(EndpointConstant.POKEMON_URL).pipe(
       map((responseData: any) => {
-        const entities = responseData.results;
-        return entities;
+        return responseData.results;
+      })
+    );
+  }
+
+  fetchImage(url: string): Observable<Array<any>> {
+    return this.http.get(url).pipe(
+      map((responseData: any) => {
+        return responseData;
       })
     );
   }

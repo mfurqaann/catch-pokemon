@@ -1,8 +1,9 @@
 export class Pokemon {
-  constructor(
-    public count: number,
-    public next: string,
-    public previous: string,
-    public results: Array<any>
-  ) {}
+  name: string;
+  url: string;
+
+  constructor(name: string, url: string) {
+    this.name = name;
+    this.url = url;
+  }
 }
