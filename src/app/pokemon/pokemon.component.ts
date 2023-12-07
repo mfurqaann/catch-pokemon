@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PokemonService } from './shared/pokemon.service';
-import { Pokemon } from './shared/pokemon.model';
 import { PokemonDetail } from './shared/pokemon-detail.model';
+import { Observable, Subject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-pokemon',
   templateUrl: './pokemon.component.html',
   styleUrls: ['./pokemon.component.scss'],
 })
-export class PokemonComponent implements OnInit {
-  pokemons: Array<any> = [];
-  pokemonDetail: Array<PokemonDetail> = [];
+export class PokemonComponent implements OnInit, OnDestroy {
+  pokemonDetails: Array<PokemonDetail> = [];
   loading: boolean = false;
+  fetchSubscription = new Subscription();
   constructor(private pokemonService: PokemonService) {}
 
   ngOnInit(): void {
@@ -19,21 +19,28 @@ export class PokemonComponent implements OnInit {
   }
 
   loadPokemon() {
-    this.loading = true;
-    this.pokemonService.fetch().subscribe((pokemons) => {
-      for (let pokemon of pokemons) {
-        this.pokemonService
-          .fetchImage(pokemon.url)
-          .subscribe((responseData: any) => {
-            this.pokemonDetail.push({
-              name: responseData.name,
-              imageUrl: responseData.sprites.front_default,
-              id: responseData.id,
-            });
-            this.pokemonDetail.sort((a, b) => a.id - b.id);
-          });
-      }
+    this.fetchSubscription = this.pokemonService
+      .fetch()
+      .subscribe((responseCollection: any) => {
+        for (let response of responseCollection.results) {
+          this.fetchDetail(response.url);
+        }
+      });
+  }
+
+  fetchDetail(url: string) {
+    this.pokemonService.fetchDetail(url).subscribe((detailResponse: any) => {
+      this.pokemonDetails.push({
+        id: detailResponse.id,
+        name: detailResponse.name,
+        imageUrl: detailResponse.sprites.front_default,
+        abilities: detailResponse.abilities,
+      });
+      this.pokemonDetails.sort((a, b) => a.id - b.id);
     });
-    this.loading = false;
+  }
+
+  ngOnDestroy(): void {
+    this.fetchSubscription.unsubscribe();
   }
 }

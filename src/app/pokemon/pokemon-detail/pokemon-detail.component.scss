@@ -1,0 +1,19 @@
+.container {
+    width: 100%;
+    color: black;
+}
+
+.card {
+    margin: 30px auto;
+    border: solid black 10px;
+    border-radius: 10px;
+}
+
+.card-image {
+    border: solid grey 5px;
+    border-radius: 5px;
+}
+
+.card-body-child img {
+    width: 100px;
+}

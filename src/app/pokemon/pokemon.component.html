@@ -1,12 +1,20 @@
-<!-- <h1>CATCH YOUR POKEMON</h1> -->
-<div class="row">
-  <div *ngIf="loading">loading</div>
+<h1 class="text-center">CATCH YOUR POKEMON</h1>
 
-  <ng-container *ngIf="!loading">
-    <app-pokemon-item
-      *ngFor="let pokemon of pokemonDetail; let i = index"
-      [pokemon]="pokemon"
-      [index]="i"
-    ></app-pokemon-item>
-  </ng-container>
-</div>
+<mat-drawer-container>
+  <mat-drawer opened="true" mode="over" #drawer class="drawer-container">
+    <div style="width: 500px">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer>
+  <div class="row justify-content-center">
+    <div *ngIf="loading">loading</div>
+    <ng-container *ngIf="!loading">
+      <app-pokemon-item
+        *ngFor="let pokemon of pokemonDetails; let i = index"
+        [pokemon]="pokemon"
+        [index]="i"
+        (click)="drawer.toggle()"
+      ></app-pokemon-item>
+    </ng-container>
+  </div>
+</mat-drawer-container>

@@ -1,0 +1,12 @@
+mat-drawer-container, mat-drawer {
+    background-color: white;
+}
+
+.drawer-container {
+    position: fixed;
+    top: 30%;
+    bottom: 30%;
+    height: 500px;
+
+    border-radius: 10px;
+}
