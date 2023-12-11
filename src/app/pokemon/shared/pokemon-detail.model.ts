@@ -1,18 +1,15 @@
+export interface Move {
+  name: string;
+  url: string;
+}
+
 export class PokemonDetail {
   name: string;
   imageUrl: string;
   id: number;
-  abilities: Array<any>;
+  height: number;
+  weight: number;
+  type: any;
 
-  constructor(
-    name: string,
-    imageUrl: string,
-    id: number,
-    abilities: Array<any>
-  ) {
-    this.name = name;
-    this.imageUrl = imageUrl;
-    this.id = id;
-    this.abilities = abilities;
-  }
+  moves: Array<Move>;
 }

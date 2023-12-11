@@ -1,0 +1,14 @@
+<h1 class="text-center" *ngIf="isThereCollectionPokemon">
+  Your Pokemon Collections
+</h1>
+
+<div class="row justify-content-center">
+  <h1 class="text-center" *ngIf="!isThereCollectionPokemon">
+    You don't have a Pokemon collection, catch it now!
+  </h1>
+  <app-pokemon-item
+    *ngFor="let pokemon of catchedPokemons; let i = index"
+    [pokemon]="pokemon"
+    [index]="i"
+  ></app-pokemon-item>
+</div>

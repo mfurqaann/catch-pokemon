@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { PokemonService } from './shared/pokemon.service';
-import { PokemonDetail } from './shared/pokemon-detail.model';
+
 import { Observable, Subject, Subscription } from 'rxjs';
+
+import { PokemonService } from './shared/pokemon.service';
+import { BaseResponse, BaseResponsePokemon } from './shared/pokemon.model';
 
 @Component({
   selector: 'app-pokemon',
@@ -9,38 +11,44 @@ import { Observable, Subject, Subscription } from 'rxjs';
   styleUrls: ['./pokemon.component.scss'],
 })
 export class PokemonComponent implements OnInit, OnDestroy {
-  pokemonDetails: Array<PokemonDetail> = [];
+  pokemons: Array<BaseResponsePokemon> = [];
   loading: boolean = false;
   fetchSubscription = new Subscription();
   constructor(private pokemonService: PokemonService) {}
 
   ngOnInit(): void {
+    this.pokemonService.loading.subscribe((value) => {
+      this.loading = value;
+
+      console.log(value);
+    });
     this.loadPokemon();
+  }
+
+  ngOnDestroy(): void {
+    this.fetchSubscription.unsubscribe();
   }
 
   loadPokemon() {
     this.fetchSubscription = this.pokemonService
       .fetch()
-      .subscribe((responseCollection: any) => {
+      .subscribe((responseCollection: BaseResponse) => {
         for (let response of responseCollection.results) {
-          this.fetchDetail(response.url);
+          this.fetchPokemon(response.url);
         }
       });
   }
 
-  fetchDetail(url: string) {
-    this.pokemonService.fetchDetail(url).subscribe((detailResponse: any) => {
-      this.pokemonDetails.push({
-        id: detailResponse.id,
-        name: detailResponse.name,
-        imageUrl: detailResponse.sprites.front_default,
-        abilities: detailResponse.abilities,
+  fetchPokemon(url: string) {
+    this.pokemonService
+      .fetchPokemon(url)
+      .subscribe((baseResponsePokemon: BaseResponsePokemon) => {
+        this.pokemons.push({
+          id: baseResponsePokemon.id,
+          name: baseResponsePokemon.name,
+          sprites: baseResponsePokemon.sprites,
+        });
+        this.pokemons.sort((a, b) => a.id - b.id);
       });
-      this.pokemonDetails.sort((a, b) => a.id - b.id);
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.fetchSubscription.unsubscribe();
   }
 }

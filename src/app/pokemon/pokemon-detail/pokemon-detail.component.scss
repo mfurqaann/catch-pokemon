@@ -1,19 +1,50 @@
+:root {
+    --mat-tab-header-inactive-label-text-color : black !important;
+}
+
 .container {
     width: 100%;
     color: black;
 }
 
 .card {
+    height: 50%;
     margin: 30px auto;
-    border: solid black 10px;
-    border-radius: 10px;
+    border: none;
 }
 
 .card-image {
-    border: solid grey 5px;
+    margin: 0 auto;
+    width: 50%;
+    height: 50%;
     border-radius: 5px;
 }
 
 .card-body-child img {
     width: 100px;
+}
+
+.container-evolution-chain {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.carousel-control-next-icon, .carousel-control-prev-icon  {
+    background-color: black;
+}
+
+mat-spinner {
+    margin-top: 250px;
+}
+
+.mdc-tab__content {
+    .mdc-tab__text-label {
+        color: black !important;
+    }
+
+}
+
+.pokeball-img img {
+    width: 10%;
 }

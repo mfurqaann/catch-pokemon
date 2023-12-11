@@ -1,28 +1,167 @@
 <div class="container">
-  <div class="card" style="width: 18rem">
-    <div class="ml-3">Nama Pokemon</div>
-    <div class="card-image">
+  <mat-spinner class="mx-auto" *ngIf="loading"></mat-spinner>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            {{ pokemonDetail?.name | uppercase }} Has Been Caught!
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          You have {{ myPokemonCount }} pokemon in your pokedex!
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-dismiss="modal"
+            (click)="goToMyPokemon()"
+          >
+            Go To Pokemon Collections
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="!loading"
+    id="carouselExampleControls"
+    class="carousel slide"
+    data-ride=""
+  >
+    <div
+      class="text-center pokeball-img"
+      data-toggle="modal"
+      data-target="#exampleModal"
+    >
       <img
-        src="https://images.secretlab.co/theme/common/collab_pokemon_catalog_charizard-min.png"
-        class="card-img-top"
-        alt="..."
+        src="../../../assets/pokeball.png"
+        style="cursor: pointer"
+        (click)="onCatchPokemon(id)"
       />
+      <h3>Catch It !</h3>
     </div>
-    <div class="card-body">
-      <span class="card-body-child">
-        <img
-          src="https://images.secretlab.co/theme/common/collab_pokemon_catalog_charizard-min.png"
-          class="card-img-top"
-          alt="..."
-        />
-      </span>
-      <span class="card-body-child">
-        <img
-          src="https://images.secretlab.co/theme/common/collab_pokemon_catalog_charizard-min.png"
-          class="card-img-top"
-          alt="..."
-        />
-      </span>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="card w-25" style="width: 18rem">
+          <div class="ml-3 text-center card-pokemon-name">
+            <h3>
+              #{{ pokemonDetail.id }} {{ pokemonDetail?.name | uppercase }}
+            </h3>
+          </div>
+          <div class="card-image">
+            <img
+              *ngIf="pokemonDetail.imageUrl"
+              [src]="pokemonDetail?.imageUrl"
+              class="card-img-top"
+            />
+          </div>
+        </div>
+      </div>
     </div>
+    <a
+      class="carousel-control-prev"
+      role="button"
+      data-slide="prev"
+      (click)="onPreviousClick(pokemonDetail.id)"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a
+      class="carousel-control-next"
+      role="button"
+      data-slide="next"
+      (click)="onNextClick(pokemonDetail.id)"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div *ngIf="!loading">
+    <h3 class="text-center">Detail</h3>
+
+    <mat-tab-group>
+      <mat-tab label="Moves">
+        <ng-template matTabContent>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" style="width: 400px">Name</th>
+                <th scope="col">Accuracy</th>
+                <th scope="col">Power</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let pokemonMove of pokemonMoves">
+                <td *ngIf="pokemonMove.accuracy" scope="row">
+                  {{ pokemonMove.name | uppercase }}
+                </td>
+                <td *ngIf="pokemonMove.accuracy">
+                  <span>{{ pokemonMove.accuracy }}</span>
+                  <mat-progress-bar
+                    style="width: 300px"
+                    mode="determinate"
+                    [value]="pokemonMove.accuracy"
+                  ></mat-progress-bar>
+                </td>
+                <td *ngIf="pokemonMove.power">
+                  <span>{{ pokemonMove.power }}</span>
+                  <mat-progress-bar
+                    style="width: 300px"
+                    mode="determinate"
+                    [value]="pokemonMove.power"
+                  ></mat-progress-bar>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="About">
+        <ng-template matTabContent>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Height</th>
+                <th scope="col">Weight</th>
+                <th scope="col">Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">{{ pokemonDetail.name | uppercase }}</th>
+                <td>{{ pokemonDetail.height }}</td>
+                <td>{{ pokemonDetail.weight }}</td>
+                <td>{{ pokemonDetail.type | uppercase }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
   </div>
 </div>

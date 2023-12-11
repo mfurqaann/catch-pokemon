@@ -8,14 +8,17 @@ import { PokemonItemComponent } from './pokemon-item/pokemon-item.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { PokemonDetailComponent } from './pokemon-detail/pokemon-detail.component';
 import { PokemonDetailService } from './shared/pokemon-detail.service';
+import { MaterialUIModule } from '../material-ui/material-ui.module';
+import { MyPokemonComponent } from './my-pokemon/my-pokemon.component';
 
 @NgModule({
   declarations: [
     PokemonComponent,
     PokemonItemComponent,
     PokemonDetailComponent,
+    MyPokemonComponent,
   ],
-  imports: [CommonModule, AppRoutingModule, MatSidenavModule],
+  imports: [CommonModule, AppRoutingModule, MatSidenavModule, MaterialUIModule],
   providers: [PokemonService, PokemonDetailService],
 })
 export class PokemonModule {}

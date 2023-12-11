@@ -1,7 +1,7 @@
-<a [routerLink]="[pokemon.id]" class="container-card">
-  <div class="col-md-4">
+<a [routerLink]="['/all-pokemon', pokemon.id]" class="container-card">
+  <div class="col-md-3">
     <div class="card" style="width: 18rem">
-      <img [src]="pokemon.imageUrl" class="card-img-top" alt="..." />
+      <img [src]="pokemon.sprites.front_default" class="card-img-top" />
       <div class="card-body">
         <h5 class="card-title">{{ pokemon.name | uppercase }}</h5>
       </div>
