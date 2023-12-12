@@ -64,10 +64,11 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <div class="card w-25" style="width: 18rem">
-          <div class="ml-3 text-center card-pokemon-name">
+        <div class="card">
+          <div class="text-center card-pokemon-name">
+            <h3>#{{ pokemonDetail.id }}</h3>
             <h3>
-              #{{ pokemonDetail.id }} {{ pokemonDetail?.name | uppercase }}
+              {{ pokemonDetail?.name | uppercase }}
             </h3>
           </div>
           <div class="card-image">

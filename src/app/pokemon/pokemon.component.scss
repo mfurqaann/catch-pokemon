@@ -18,3 +18,9 @@ mat-spinner {
 
     border-radius: 10px;
 }
+
+@media (max-width: 767px) {
+    h1 {
+      font-size: 24px; /* Atur ukuran font sesuai kebutuhan */
+    }
+  }

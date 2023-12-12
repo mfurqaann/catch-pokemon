@@ -10,6 +10,7 @@
 .card {
     height: 50%;
     margin: 30px auto;
+    width: 300px;
     border: none;
 }
 
@@ -23,6 +24,7 @@
 .card-body-child img {
     width: 100px;
 }
+
 
 .container-evolution-chain {
     display: flex;
@@ -48,3 +50,10 @@ mat-spinner {
 .pokeball-img img {
     width: 10%;
 }
+
+
+@media (max-width: 767px) {
+    h3 {
+      font-size: 18px; /* Atur ukuran font sesuai kebutuhan */
+    }
+  }
