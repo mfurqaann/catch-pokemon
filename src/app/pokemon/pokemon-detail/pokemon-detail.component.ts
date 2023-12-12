@@ -31,7 +31,12 @@ export class PokemonDetailComponent implements OnInit, OnDestroy {
       this.loading = value;
     });
     this.route.params.subscribe((params: Params) => {
-      this.id = +params['id'];
+      if (+params['id']) {
+        this.id = +params['id'];
+      } else {
+        this.router.navigateByUrl('not-found');
+      }
+
       this.fetchDetailPokemon(this.id);
     });
   }
