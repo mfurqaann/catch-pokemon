@@ -34,6 +34,7 @@ export class MyPokemonComponent implements OnInit {
           id: catchedPokemon.id,
           name: catchedPokemon.name,
           sprites: catchedPokemon.sprites,
+          types: catchedPokemon.types[0].type.name,
         });
       }
     );

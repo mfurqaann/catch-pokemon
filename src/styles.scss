@@ -1,4 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
 
+
+:root {
+    --bg-poke-color-light-grass: rgba(170, 209, 94, 0.5);
+    --bg-poke-color-light-fire: rgba(236, 132, 132, 0.5);
+    --bg-poke-color-light-normal: rgba(255, 141, 109, 0.5);
+    --bg-poke-color-light-fighting: rgba(255, 141, 109, 0.5);
+    --bg-poke-color-light-flying: rgba(198, 183, 245, 0.5);
+    --bg-poke-color-light-poison: rgba(193, 131, 193, 0.5);
+    --bg-poke-color-light-ground: rgba(235, 214, 157, 0.5);
+    --bg-poke-color-light-rock: rgba(209, 193, 125, 0.5);
+    --bg-poke-color-light-bug: rgba(198, 209, 110, 0.5);
+    --bg-poke-color-light-ghost: rgba(162, 146, 188, 0.5);
+    --bg-poke-color-light-steel: rgba(184, 184, 208, 0.5);
+    --bg-poke-color-light-water: rgba(148, 219, 238, 0.5);
+    --bg-poke-color-light-electric: rgba(250, 224, 120, 0.5);
+    --bg-poke-color-light-psychic: rgba(250, 146, 178, 0.5);
+    --bg-poke-color-light-ice: rgba(188, 230, 230, 0.5);
+    --bg-poke-color-light-dragon: rgba(218, 194, 102, 0.5);
+    --bg-poke-color-light-dark: rgba(162, 146, 136, 0.5);
+    --bg-poke-color-light-fairy: rgba(244, 189, 201, 0.5);
+}
+
+
+
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

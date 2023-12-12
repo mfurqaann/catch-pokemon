@@ -36,10 +36,10 @@ export class PokemonService {
     return this.loading$.asObservable();
   }
 
-  fetch(): Observable<BaseResponse> {
+  fetch(offset: number, limit: number): Observable<BaseResponse> {
     this.loading$.next(true);
 
-    const url = `${EndpointConstant.POKEMON_URL}${EndpointConstant.FETCH_POKEMON}`;
+    const url = `${EndpointConstant.POKEMON_URL}${EndpointConstant.FETCH_POKEMON}?offset=${offset}&limit=${limit}`;
 
     return this.http.get<BaseResponse>(url).pipe(
       delay(1000),

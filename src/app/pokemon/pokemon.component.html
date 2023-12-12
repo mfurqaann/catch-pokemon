@@ -1,11 +1,23 @@
 <h1 class="text-center">CATCH YOUR POKEMON</h1>
-<div class="row justify-content-center align-items-center">
-  <mat-spinner *ngIf="loading"></mat-spinner>
-  <ng-container *ngIf="!loading">
-    <app-pokemon-item
-      *ngFor="let pokemon of pokemons; let i = index"
-      [pokemon]="pokemon"
-      [index]="i"
-    ></app-pokemon-item>
-  </ng-container>
+<div style="margin-bottom: 200px">
+  <div class="row justify-content-center align-items-center">
+    <mat-spinner *ngIf="loading"></mat-spinner>
+    <ng-container *ngIf="!loading">
+      <app-pokemon-item
+        *ngFor="let pokemon of pokemons; let i = index"
+        [pokemon]="pokemon"
+        [index]="i"
+      ></app-pokemon-item>
+    </ng-container>
+  </div>
+  <nav *ngIf="!loading">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="isFirstPage">
+        <a class="page-link" (click)="previousPage()">Previous</a>
+      </li>
+      <li class="page-item" [class.disabled]="isLastPage">
+        <a class="page-link" (click)="nextPage()">Next</a>
+      </li>
+    </ul>
+  </nav>
 </div>
