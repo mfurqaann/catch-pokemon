@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -9,6 +9,10 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { PokemonModule } from './pokemon/pokemon.module';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environments';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, NotFoundComponent],
@@ -18,6 +22,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
     PokemonModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    StoreModule.forRoot([]),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    EffectsModule.forRoot([]),
   ],
   providers: [
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
