@@ -1,9 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { Observable, Subscription, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { PokemonService } from './shared/pokemon.service';
-import { BaseResponse, BaseResponsePokemon } from './shared/pokemon.model';
+import { BaseResponsePokemon } from './shared/pokemon.model';
 import { Store, select } from '@ngrx/store';
 import { actions } from './shared/pokemon.reducer';
 import { AppState } from '../app.reducer';

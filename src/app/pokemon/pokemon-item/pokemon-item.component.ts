@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { BaseResponsePokemon, PokemonItem } from '../shared/pokemon.model';
+import { BaseResponsePokemon } from '../shared/pokemon.model';
 
 @Component({
   selector: 'app-pokemon-item',
