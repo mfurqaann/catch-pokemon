@@ -12,9 +12,9 @@ import { PokemonService } from '../shared/pokemon.service';
   styleUrls: ['./pokemon-detail.component.scss'],
 })
 export class PokemonDetailComponent implements OnInit, OnDestroy {
-  id: number = 0;
-  loading: boolean = false;
-  showFiller: boolean = false;
+  id = 0;
+  loading = false;
+  showFiller = false;
   pokemonDetail: PokemonDetail = null;
   pokemonMoves = [];
   pokemonSubscription: Subscription = new Subscription();

@@ -1,13 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { BaseResponsePokemon, PokemonItem } from '../shared/pokemon.model';
+import { Component, Input } from '@angular/core';
+import { BaseResponsePokemon } from '../shared/pokemon.model';
 
 @Component({
   selector: 'app-pokemon-item',
   templateUrl: './pokemon-item.component.html',
   styleUrls: ['./pokemon-item.component.scss'],
 })
-export class PokemonItemComponent implements OnInit {
+export class PokemonItemComponent {
   @Input() pokemon: BaseResponsePokemon;
   @Input() index: number;
-  ngOnInit(): void {}
 }

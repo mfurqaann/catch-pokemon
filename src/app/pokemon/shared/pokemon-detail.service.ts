@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, delay, finalize, map } from 'rxjs';
+import { Observable, Subject, finalize } from 'rxjs';
 import { EndpointConstant } from 'src/app/common/constant/endpoint.constant';
 
 @Injectable()

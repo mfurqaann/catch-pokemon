@@ -12,7 +12,7 @@ import { BaseResponse, BaseResponsePokemon } from './shared/pokemon.model';
 })
 export class PokemonComponent implements OnInit, OnDestroy {
   pokemons: Array<BaseResponsePokemon> = [];
-  loading: boolean = false;
+  loading = false;
   fetchSubscription = new Subscription();
   previous: string;
   next: string;
@@ -64,7 +64,7 @@ export class PokemonComponent implements OnInit, OnDestroy {
         this.next = responseCollection.next;
         this.previous = responseCollection.previous;
 
-        for (let response of responseCollection.results) {
+        for (const response of responseCollection.results) {
           this.fetchPokemon(response.url);
         }
       });
