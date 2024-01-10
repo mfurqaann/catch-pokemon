@@ -7,26 +7,21 @@ import {
   on,
   props,
 } from '@ngrx/store';
-import { BaseResponsePokemon, PokemonResults } from './pokemon.model';
+
+import { BaseResponse, BaseResponsePokemon } from './pokemon.model';
 
 export const featureName = 'pokemon';
 
 export interface AppState {
-  basePokemons: Array<PokemonResults>;
+  basePokemon: BaseResponse;
   pokemons: Array<BaseResponsePokemon>;
   loading: boolean;
-  next: string;
-  previous: string;
-  pagination: { offset: number; limit: number };
 }
 
 export const initialState: AppState = {
-  basePokemons: [],
+  basePokemon: null,
   pokemons: [],
   loading: false,
-  next: '',
-  previous: '',
-  pagination: { offset: 0, limit: 0 },
 };
 
 export const actions = {
@@ -36,7 +31,11 @@ export const actions = {
   ),
   fetchActionSuccess: createAction(
     `[${featureName}] FETCH_BASE_SUCCESS`,
-    props<{ payload: Array<PokemonResults> }>()
+    props<{ payload: BaseResponse }>()
+  ),
+  fetchActionBaseResponseSuccess: createAction(
+    `[${featureName} FETCH_BASE_RESPONSE_SUCCESS]`,
+    props<{ payload: BaseResponse }>
   ),
   fetchActionFailure: createAction(
     `[${featureName}] ERROR`,
@@ -54,8 +53,8 @@ export const pokemonReducer = createReducer(
   on(actions.fetchAction, (state) => ({ ...state, loading: true })),
   on(actions.fetchActionSuccess, (state, { payload }) => ({
     ...state,
-    loading: false,
-    basePokemons: payload,
+    loading: true,
+    basePokemon: payload,
   })),
   on(actions.fetchPokemonsAction, (state) => ({
     ...state,
@@ -75,7 +74,6 @@ export function reducer(state: AppState, action: Action) {
 export const getState = createFeatureSelector<AppState>(featureName);
 const getStateBy = (fn: (_: AppState) => any) => createSelector(getState, fn);
 
-export const getBasePokemons = getStateBy((state) => state.basePokemons);
+export const getBasePokemon = getStateBy((state) => state.basePokemon);
 export const getPokemons = getStateBy((state) => state.pokemons);
-export const getPagination = getStateBy((state) => state.pagination);
 export const getLoading = getStateBy((state) => state.loading);

@@ -10,14 +10,14 @@
       ></app-pokemon-item>
     </ng-container>
   </div>
-  <!-- <nav *ngIf="(loading$ | async )=== false">
+  <nav *ngIf="(loading$ | async) === false">
     <ul class="pagination justify-content-center">
-      <li class="page-item" [class.disabled]="isFirstPage">
-        <a class="page-link" (click)="previousPage()">Previous</a>
+      <li class="page-item" [class.disabled]="(page | async).previous === null">
+        <a class="page-link">Previous</a>
       </li>
-      <li class="page-item" [class.disabled]="isLastPage">
-        <a class="page-link" (click)="nextPage()">Next</a>
+      <li class="page-item" [class.disabled]="(page | async).next === null">
+        <a class="page-link" (click)="onNextPage()">Next</a>
       </li>
     </ul>
-  </nav> -->
+  </nav>
 </div>
