@@ -1,0 +1,12 @@
+{
+    "LABEL" : {
+        "CATCH_YOUR_POKEMON": "Catch Your Pokemon",
+        "YOU_DONT_HAVE_COLLECTION_POKEMON": "You don't have a Pokemon collection, catch it now!",
+        "YOUR_POKEMON_COLLECTIONS": "Your Pokemon Collections"
+    },
+    "MENU" : {
+        "ALL_POKEMON": "All Pokemon",
+        "MY_POKEMON": "My Pokemon",
+        "RANDOM_POKEMON": "Random Pokemon"
+    }
+}

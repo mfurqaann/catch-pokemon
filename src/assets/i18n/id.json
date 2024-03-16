@@ -1,0 +1,12 @@
+{
+    "LABEL" : {
+        "CATCH_YOUR_POKEMON": "Tangkap Pokemon Anda",
+        "YOU_DONT_HAVE_COLLECTION_POKEMON": "Anda tidak memiliki koleksi Pokemon, tangkap sekarang!",
+        "YOUR_POKEMON_COLLECTIONS": "Koleksi Pokemon Anda"
+    },
+    "MENU" : {
+        "ALL_POKEMON": "Semua Pokemon",
+        "MY_POKEMON": "Pokemon Saya",
+        "RANDOM_POKEMON": "Acak Pokemon"
+    }
+}

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../shared/pokemon.service';
 import { BaseResponsePokemon } from '../shared/pokemon.model';
+import { LabelConstant } from 'src/app/common/constant/label.constant';
 
 @Component({
   selector: 'app-my-pokemon',
@@ -8,6 +9,10 @@ import { BaseResponsePokemon } from '../shared/pokemon.model';
   styleUrls: ['./my-pokemon.component.scss'],
 })
 export class MyPokemonComponent implements OnInit {
+  readonly constant = {
+    label: LabelConstant,
+  };
+
   catchedPokemons: Array<BaseResponsePokemon> = [];
   constructor(private pokemonService: PokemonService) {}
 

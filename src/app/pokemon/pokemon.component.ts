@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { PokemonService } from './shared/pokemon.service';
 import { BaseResponse, BaseResponsePokemon } from './shared/pokemon.model';
+import { LabelConstant } from '../common/constant/label.constant';
 
 @Component({
   selector: 'app-pokemon',
@@ -11,25 +12,32 @@ import { BaseResponse, BaseResponsePokemon } from './shared/pokemon.model';
   styleUrls: ['./pokemon.component.scss'],
 })
 export class PokemonComponent implements OnInit, OnDestroy {
+  readonly constant = {
+    label: LabelConstant,
+  };
+
   pokemons: Array<BaseResponsePokemon> = [];
   loading = false;
   fetchSubscription = new Subscription();
+  loadingSubscription = new Subscription();
   previous: string;
   next: string;
   pagination: { offset: number; limit: number } = { offset: 0, limit: 0 };
+
   constructor(private pokemonService: PokemonService) {}
 
-  ngOnInit(): void {
-    this.pokemonService.loading.subscribe((value) => {
-      this.loading = value;
-
-      console.log(value);
-    });
+  ngOnInit() {
+    this.loadingSubscription = this.pokemonService.loading.subscribe(
+      (value) => {
+        this.loading = value;
+      }
+    );
     this.loadPokemon(this.pagination.offset, this.pagination.limit);
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.fetchSubscription.unsubscribe();
+    this.loadingSubscription.unsubscribe();
   }
 
   get isLastPage() {

@@ -10,6 +10,7 @@ import { PokemonDetailComponent } from './pokemon-detail/pokemon-detail.componen
 import { PokemonDetailService } from './shared/pokemon-detail.service';
 import { MaterialUIModule } from '../material-ui/material-ui.module';
 import { MyPokemonComponent } from './my-pokemon/my-pokemon.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,13 @@ import { MyPokemonComponent } from './my-pokemon/my-pokemon.component';
     PokemonDetailComponent,
     MyPokemonComponent,
   ],
-  imports: [CommonModule, AppRoutingModule, MatSidenavModule, MaterialUIModule],
+  imports: [
+    CommonModule,
+    AppRoutingModule,
+    MatSidenavModule,
+    MaterialUIModule,
+    TranslateModule,
+  ],
   providers: [PokemonService, PokemonDetailService],
 })
 export class PokemonModule {}

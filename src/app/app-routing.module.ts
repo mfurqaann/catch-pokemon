@@ -12,7 +12,11 @@ const routes: Routes = [
     path: 'all-pokemon',
     component: PokemonComponent,
   },
-  { path: 'all-pokemon/:id', component: PokemonDetailComponent },
+  {
+    path: 'all-pokemon',
+    children: [{ path: ':id', component: PokemonDetailComponent }],
+  },
+  // { path: 'all-pokemon/:id', component: PokemonDetailComponent },
   { path: 'my-pokemon', component: MyPokemonComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: '/not-found' },

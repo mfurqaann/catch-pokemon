@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, delay, finalize } from 'rxjs';
+import { Observable, Subject, catchError, delay, finalize } from 'rxjs';
 import { EndpointConstant } from 'src/app/common/constant/endpoint.constant';
 import { BaseResponsePokemon, BaseResponse } from './pokemon.model';
 
@@ -24,7 +24,7 @@ export class PokemonService {
     return this.loading$.asObservable();
   }
 
-  fetch(offset: number, limit: number): Observable<BaseResponse> {
+  fetch(offset: number, limit: number): Observable<any> {
     this.loading$.next(true);
 
     const url = `${EndpointConstant.POKEMON_URL}${EndpointConstant.FETCH_POKEMON}?offset=${offset}&limit=${limit}`;
@@ -33,7 +33,8 @@ export class PokemonService {
       delay(1000),
       finalize(() => {
         this.loading$.next(false);
-      })
+      }),
+      catchError((error) => error)
     );
   }
 

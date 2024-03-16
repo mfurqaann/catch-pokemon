@@ -2,6 +2,7 @@
   <a class="navbar-brand" routerLink="/">
     <img src="../../assets/img/pokemon-logo.png" style="max-width: 130px" />
   </a>
+  <button (click)="onSwitchLanguage()">switch language</button>
   <button
     class="navbar-toggler"
     type="button"
@@ -16,20 +17,28 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav align-items-center mr-auto">
       <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="/all-pokemon"
-          >All Pokemon</a
+        <a
+          class="nav-link"
+          routerLinkActive="active"
+          routerLink="/all-pokemon"
+          >{{ constant.menu.ALL_POKEMON | translate }}</a
         >
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="/my-pokemon"
-          >My Pokemon</a
+        <a
+          class="nav-link"
+          routerLinkActive="active"
+          routerLink="/my-pokemon"
+          >{{ constant.menu.MY_POKEMON | translate }}</a
         >
       </li>
     </ul>
     <ul class="navbar-nav align-items-center">
       <li class="nav-item">
         <a class="nav-link" style="cursor: pointer" (click)="onRandomPokemon()">
-          <span style="margin-right: 10px">Random Pokemon</span>
+          <span style="margin-right: 10px">{{
+            constant.menu.RANDOM_POKEMON | translate
+          }}</span>
           <img src="../../assets/img/random-logo.png" style="width: 50px"
         /></a>
       </li>
