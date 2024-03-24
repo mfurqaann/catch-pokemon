@@ -24,10 +24,16 @@ export class NavbarComponent {
   }
 
   onSwitchLanguage() {
-    if (this.translateService.getDefaultLang() === 'id') {
+    let currentLang = this.translateService.currentLang;
+
+    if (!currentLang) {
+      currentLang = localStorage.getItem('language') || 'en';
+    }
+
+    if (currentLang === 'id') {
       this.translateService.use('en');
       localStorage.setItem('language', 'en');
-    } else if (this.translateService.getDefaultLang() === 'en') {
+    } else if (currentLang === 'en') {
       this.translateService.use('id');
       localStorage.setItem('language', 'id');
     }
