@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 
 import {
   Observable,
+  catchError,
   forkJoin,
   from,
   map,
   mergeMap,
   of,
   switchMap,
+  tap,
   withLatestFrom,
 } from 'rxjs';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -37,7 +39,10 @@ export class PokemonEffect {
               })
             )
           );
-      })
+      }),
+      catchError((error: Error) => [
+        fromPokemon.actions.fetchActionFailure({ payload: { error } }),
+      ])
     );
   });
 
@@ -53,7 +58,7 @@ export class PokemonEffect {
       switchMap(({ basePokemon }) => {
         const observables = basePokemon.results.map(
           (basePokemon: PokemonResults) => {
-            return this.service.fetchPokemon(basePokemon.url).pipe(
+            return this.service.fetchDetailPokemon(basePokemon.url).pipe(
               map((pokemonResponse: BaseResponsePokemon) => {
                 const pokemon = {
                   id: pokemonResponse.id,
@@ -67,7 +72,7 @@ export class PokemonEffect {
             );
           }
         );
-
+        console.log(observables);
         // Use forkJoin to wait for all observables to complete
         return forkJoin(observables).pipe(
           map((pokemons: Array<any>) => {

@@ -33,13 +33,9 @@ export const actions = {
     `[${featureName}] FETCH_BASE_SUCCESS`,
     props<{ payload: BaseResponse }>()
   ),
-  fetchActionBaseResponseSuccess: createAction(
-    `[${featureName} FETCH_BASE_RESPONSE_SUCCESS]`,
-    props<{ payload: BaseResponse }>
-  ),
   fetchActionFailure: createAction(
     `[${featureName}] ERROR`,
-    props<{ payload: { error: Error } }>
+    props<{ payload: { error: Error } }>()
   ),
   fetchPokemonsAction: createAction(`[${featureName}] FETCH_POKEMONS`),
   fetchPokemonsSuccessAction: createAction(

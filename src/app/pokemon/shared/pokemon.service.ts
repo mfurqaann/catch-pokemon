@@ -30,15 +30,15 @@ export class PokemonService {
     const url = `${EndpointConstant.POKEMON_URL}${EndpointConstant.FETCH_POKEMON}?offset=${offset}&limit=${limit}`;
 
     return this.http.get<BaseResponse>(url).pipe(
-      delay(1000),
+      delay(500),
       finalize(() => {
         this.loading$.next(false);
       })
     );
   }
 
-  fetchPokemon(url: string): Observable<any> {
-    return this.http.get(url);
+  fetchDetailPokemon(url: string): Observable<BaseResponsePokemon> {
+    return this.http.get<BaseResponsePokemon>(url);
   }
 
   catchPokemon(id: number) {
