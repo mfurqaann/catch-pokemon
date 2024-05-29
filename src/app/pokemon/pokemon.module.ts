@@ -13,8 +13,10 @@ import { PokemonDetailService } from './shared/pokemon-detail.service';
 import { MaterialUIModule } from '../material-ui/material-ui.module';
 import { MyPokemonComponent } from './my-pokemon/my-pokemon.component';
 import * as fromPokemon from '../pokemon/shared/pokemon.reducer';
+import * as fromPokemonDetail from '../pokemon/shared/pokemon-detail.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { PokemonEffect } from './shared/pokemon.effect';
+import { PokemonDetailEffect } from './shared/pokemon-detail.effect';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,11 @@ import { PokemonEffect } from './shared/pokemon.effect';
     MatSidenavModule,
     MaterialUIModule,
     StoreModule.forFeature(fromPokemon.featureName, fromPokemon.reducer),
-    EffectsModule.forFeature([PokemonEffect]),
+    StoreModule.forFeature(
+      fromPokemonDetail.featureName,
+      fromPokemonDetail.reducer
+    ),
+    EffectsModule.forFeature([PokemonEffect, PokemonDetailEffect]),
   ],
   providers: [PokemonService, PokemonDetailService],
 })

@@ -16,7 +16,7 @@ export class PokemonDetailService {
     return this.loading$.asObservable();
   }
 
-  fetchDetail(id: number) {
+  fetchDetail(id: number): Observable<any> {
     this.loading$.next(true);
     return this.http
       .get(`${this.urlPokemon}${id}`)

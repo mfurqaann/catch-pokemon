@@ -13,6 +13,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environments';
 import { EffectsModule } from '@ngrx/effects';
+import { metaReducers, reducers } from './app.reducer';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, NotFoundComponent],
@@ -22,7 +23,13 @@ import { EffectsModule } from '@ngrx/effects';
     PokemonModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot([]),
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+      },
+    }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([]),
   ],

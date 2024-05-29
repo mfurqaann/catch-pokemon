@@ -24,11 +24,7 @@ export class PokemonComponent implements OnInit {
 
   ngOnInit(): void {
     this.initStoreStreams();
-    this.store.dispatch(
-      actions.fetchAction({
-        payload: this.pagination,
-      })
-    );
+    this.store.dispatch(actions.fetchAction({ payload: this.pagination }));
   }
 
   get page(): Observable<BaseResponse> {
@@ -36,16 +32,13 @@ export class PokemonComponent implements OnInit {
   }
 
   onNextPage() {
-    const newPagination = (this.pagination = {
-      offset: this.pagination.offset + 10,
+    this.pagination = {
+      offset: this.pagination.offset + 20,
       limit: 20,
-    });
+    };
+    const newPagination = this.pagination;
 
-    this.store.dispatch(
-      actions.fetchAction({
-        payload: newPagination,
-      })
-    );
+    this.store.dispatch(actions.fetchAction({ payload: newPagination }));
   }
 
   private initStoreStreams() {

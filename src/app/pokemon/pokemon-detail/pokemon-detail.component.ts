@@ -5,7 +5,9 @@ import { PokemonDetailService } from '../shared/pokemon-detail.service';
 import { Move, PokemonDetail } from '../shared/pokemon-detail.model';
 import { Subscription } from 'rxjs';
 import { PokemonService } from '../shared/pokemon.service';
-
+import { Store, select } from '@ngrx/store';
+import * as fromPokemonDetail from '../shared/pokemon-detail.reducer';
+import { AppState } from 'src/app/app.reducer';
 @Component({
   selector: 'app-pokemon-detail',
   templateUrl: './pokemon-detail.component.html',
@@ -19,17 +21,20 @@ export class PokemonDetailComponent implements OnInit, OnDestroy {
   pokemonMoves = [];
   pokemonSubscription: Subscription = new Subscription();
 
+  pokemonDetail$: any;
+
   constructor(
     private route: ActivatedRoute,
     private pokemonDetailService: PokemonDetailService,
     private pokemonService: PokemonService,
-    private router: Router
+    private router: Router,
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {
     this.pokemonDetailService.loading$.subscribe((value) => {
       this.loading = value;
-    });
+    }); // bikin effect di service
     this.route.params.subscribe((params: Params) => {
       if (+params['id']) {
         this.id = +params['id'];
@@ -37,7 +42,12 @@ export class PokemonDetailComponent implements OnInit, OnDestroy {
         this.router.navigateByUrl('not-found');
       }
 
-      this.fetchDetailPokemon(this.id);
+      // this.fetchDetailPokemon(this.id);
+      this.store.dispatch(
+        fromPokemonDetail.actions.fetchDetailActions({
+          payload: { id: this.id },
+        })
+      );
     });
   }
 
