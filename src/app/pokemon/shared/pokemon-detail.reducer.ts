@@ -7,11 +7,12 @@ import {
   on,
   props,
 } from '@ngrx/store';
+import { Move, PokemonDetail } from './pokemon-detail.model';
 
 export const featureName = 'pokemonDetail';
 
 export interface AppStateDetail {
-  selectedPokemon: any;
+  selectedPokemon: PokemonDetail;
   loading: boolean;
   error: Error;
 }
@@ -29,7 +30,7 @@ export const actions = {
   ),
   fetchDetailSuccess: createAction(
     `[${featureName} FETCH_DETAIL_SUCCESS]`,
-    props<{ payload: { detailPokemon: any } }>()
+    props<{ payload: any }>()
   ),
   fetchDetailFailed: createAction(
     `[${featureName} FETCH_DETAIL_FAILED]`,
@@ -40,10 +41,20 @@ export const actions = {
 export const pokemonDetailReducer = createReducer(
   initialState,
   on(actions.fetchDetailActions, (state) => ({ ...state, loading: true })),
-  on(actions.fetchDetailSuccess, (state, payload) => ({
+  on(actions.fetchDetailSuccess, (state, { payload }) => ({
     ...state,
     loading: false,
-    selectedPokemon: payload,
+    selectedPokemon: {
+      name: payload.name,
+      imageUrl: payload.sprites.other.dream_world.front_default,
+      id: payload.id,
+      height: payload.height,
+      weight: payload.weight,
+      type: payload.types[0].type.name,
+      moves: payload.moves
+        .slice(0, 5)
+        .map((value: { move: Move }) => value.move),
+    },
   })),
   on(actions.fetchDetailFailed, (state, { payload }) => ({
     ...state,

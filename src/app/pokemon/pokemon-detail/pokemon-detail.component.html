@@ -12,8 +12,12 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">
-            {{ pokemonDetail?.name | uppercase }} Has Been Caught!
+          <h5
+            *ngIf="pokemonDetail$ | async as pokemonDetail"
+            class="modal-title"
+            id="exampleModalLabel"
+          >
+            {{ pokemonDetail.name | uppercase }} Has Been Caught!
           </h5>
           <button
             type="button"
@@ -45,7 +49,7 @@
   </div>
 
   <div
-    *ngIf="!loading"
+    *ngIf="!loading && pokemonDetail$ | async as pokemonDetail"
     id="carouselExampleControls"
     class="carousel slide"
     data-ride=""

@@ -3,7 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { PokemonDetailService } from '../shared/pokemon-detail.service';
 import { Move, PokemonDetail } from '../shared/pokemon-detail.model';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { PokemonService } from '../shared/pokemon.service';
 import { Store, select } from '@ngrx/store';
 import * as fromPokemonDetail from '../shared/pokemon-detail.reducer';
@@ -21,7 +21,7 @@ export class PokemonDetailComponent implements OnInit, OnDestroy {
   pokemonMoves = [];
   pokemonSubscription: Subscription = new Subscription();
 
-  pokemonDetail$: any;
+  pokemonDetail$: Observable<PokemonDetail>;
 
   constructor(
     private route: ActivatedRoute,
@@ -49,6 +49,8 @@ export class PokemonDetailComponent implements OnInit, OnDestroy {
         })
       );
     });
+
+    this.initStoreStreams();
   }
 
   ngOnDestroy(): void {
@@ -88,31 +90,31 @@ export class PokemonDetailComponent implements OnInit, OnDestroy {
     return catchedPokemons.some((item: any) => item.id === response.id);
   }
 
-  private fetchDetailPokemon(id: number) {
-    this.pokemonSubscription = this.pokemonDetailService
-      .fetchDetail(id)
-      .subscribe((detailPokemon: any) => {
-        this.getPokemonDetail(detailPokemon);
-      });
-  }
+  // private fetchDetailPokemon(id: number) {
+  //   this.pokemonSubscription = this.pokemonDetailService
+  //     .fetchDetail(id)
+  //     .subscribe((detailPokemon: any) => {
+  //       this.getPokemonDetail(detailPokemon);
+  //     });
+  // }
 
-  private getPokemonDetail(detailPokemon) {
-    if (!detailPokemon) {
-      return;
-    }
-    this.pokemonDetail = {
-      name: detailPokemon?.name,
-      imageUrl: detailPokemon?.sprites.other.dream_world.front_default,
-      id: detailPokemon?.id,
-      height: detailPokemon.height,
-      weight: detailPokemon.weight,
-      type: detailPokemon.types[0].type.name,
-      moves: detailPokemon.moves
-        .slice(0, 5)
-        .map((value: { move: Move }) => value.move),
-    };
-    this.fetchMove();
-  }
+  // private getPokemonDetail(detailPokemon) {
+  //   if (!detailPokemon) {
+  //     return;
+  //   }
+  //   this.pokemonDetail = {
+  //     name: detailPokemon?.name,
+  //     imageUrl: detailPokemon?.sprites.other.dream_world.front_default,
+  //     id: detailPokemon?.id,
+  //     height: detailPokemon.height,
+  //     weight: detailPokemon.weight,
+  //     type: detailPokemon.types[0].type.name,
+  //     moves: detailPokemon.moves
+  //       .slice(0, 5)
+  //       .map((value: { move: Move }) => value.move),
+  //   };
+  //   this.fetchMove();
+  // }
 
   private fetchMove() {
     this.pokemonMoves = [];
@@ -122,5 +124,11 @@ export class PokemonDetailComponent implements OnInit, OnDestroy {
         this.pokemonMoves.push(move);
       });
     });
+  }
+
+  private initStoreStreams() {
+    this.pokemonDetail$ = this.store.pipe(
+      select(fromPokemonDetail.getPokemonDetail)
+    );
   }
 }
