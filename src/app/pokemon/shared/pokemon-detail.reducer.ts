@@ -14,7 +14,7 @@ export const featureName = 'pokemonDetail';
 export interface AppStateDetail {
   selectedPokemon: PokemonDetail;
   loading: boolean;
-  error: Error;
+  error: string;
 }
 
 export const initialState: AppStateDetail = {
@@ -34,7 +34,16 @@ export const actions = {
   ),
   fetchDetailFailed: createAction(
     `[${featureName} FETCH_DETAIL_FAILED]`,
-    props<{ payload: { error: Error } }>()
+    props<{ payload: { error: string } }>()
+  ),
+  fetchMoves: createAction(`[${featureName} FETCH_MOVES]`),
+  fetchMovesSuccess: createAction(
+    `[${featureName} FETCH_MOVES_SUCCESS]`,
+    props<{ payload: { moves: any } }>()
+  ),
+  fetchMovesFailed: createAction(
+    `[${featureName} FETCH_MOVES_FAILED]`,
+    props<{ payload: any }>()
   ),
 };
 
@@ -59,6 +68,9 @@ export const pokemonDetailReducer = createReducer(
   on(actions.fetchDetailFailed, (state, { payload }) => ({
     ...state,
     error: payload.error,
+  })),
+  on(actions.fetchMoves, (state) => ({
+    ...state,
   }))
 );
 
@@ -71,3 +83,4 @@ const getStateBy = (fn: (_: AppStateDetail) => any) =>
   createSelector(getState, fn);
 
 export const getPokemonDetail = getStateBy((state) => state.selectedPokemon);
+export const getMoves = getStateBy((state) => state.selectedPokemon.moves);

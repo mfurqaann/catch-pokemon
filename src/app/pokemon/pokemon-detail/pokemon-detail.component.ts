@@ -41,14 +41,11 @@ export class PokemonDetailComponent implements OnInit, OnDestroy {
       } else {
         this.router.navigateByUrl('not-found');
       }
-
-      // this.fetchDetailPokemon(this.id);
-      this.store.dispatch(
-        fromPokemonDetail.actions.fetchDetailActions({
-          payload: { id: this.id },
-        })
-      );
     });
+
+    this.store.dispatch(
+      fromPokemonDetail.actions.fetchDetailActions({ payload: { id: this.id } })
+    );
 
     this.initStoreStreams();
   }

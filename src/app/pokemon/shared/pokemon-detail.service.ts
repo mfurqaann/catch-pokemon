@@ -23,7 +23,7 @@ export class PokemonDetailService {
       .pipe(finalize(() => this.loading$.next(false)));
   }
 
-  fetchMove(url: string) {
+  fetchMove(url: string): Observable<any> {
     return this.http.get(url);
   }
 }
