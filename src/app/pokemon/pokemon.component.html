@@ -12,11 +12,25 @@
   </div>
   <nav *ngIf="!loading">
     <ul class="pagination justify-content-center">
-      <li class="page-item" [class.disabled]="isFirstPage">
-        <a class="page-link" (click)="previousPage()">Previous</a>
+      <li class="page-item mr-2" [class.disabled]="isFirstPage">
+        <button
+          mat-raised-button
+          color="primary"
+          class="page-link"
+          (click)="previousPage()"
+        >
+          Previous
+        </button>
       </li>
       <li class="page-item" [class.disabled]="isLastPage">
-        <a class="page-link" (click)="nextPage()">Next</a>
+        <button
+          class="page-link"
+          mat-raised-button
+          color="accent"
+          (click)="nextPage()"
+        >
+          Next
+        </button>
       </li>
     </ul>
   </nav>

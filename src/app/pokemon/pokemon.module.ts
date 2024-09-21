@@ -11,6 +11,7 @@ import { PokemonDetailService } from './shared/pokemon-detail.service';
 import { MaterialUIModule } from '../material-ui/material-ui.module';
 import { MyPokemonComponent } from './my-pokemon/my-pokemon.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatSidenavModule,
     MaterialUIModule,
     TranslateModule,
+    MatButtonModule,
   ],
   providers: [PokemonService, PokemonDetailService],
 })

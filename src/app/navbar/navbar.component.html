@@ -2,7 +2,7 @@
   <a class="navbar-brand" routerLink="/">
     <img src="../../assets/img/pokemon-logo.png" style="max-width: 130px" />
   </a>
-  <button (click)="onSwitchLanguage()">switch language</button>
+
   <button
     class="navbar-toggler"
     type="button"
@@ -15,32 +15,44 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav align-items-center mr-auto">
-      <li class="nav-item">
-        <a
-          class="nav-link"
+    <ul class="navbar-nav flex-3 mr-auto">
+      <li class="nav-item mr-2 mt-2">
+        <button mat-raised-button color="accent" (click)="onSwitchLanguage()">
+          Switch Language
+        </button>
+      </li>
+      <li class="nav-item mr-2 mt-2">
+        <button
+          mat-raised-button
+          color="primary"
           routerLinkActive="active"
           routerLink="/all-pokemon"
-          >{{ constant.menu.ALL_POKEMON | translate }}</a
         >
+          {{ constant.menu.ALL_POKEMON | translate }}
+        </button>
       </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
+      <li class="nav-item mt-2">
+        <button
+          mat-raised-button
+          color="primary"
           routerLinkActive="active"
           routerLink="/my-pokemon"
-          >{{ constant.menu.MY_POKEMON | translate }}</a
         >
+          {{ constant.menu.MY_POKEMON | translate }}
+        </button>
       </li>
     </ul>
-    <ul class="navbar-nav align-items-center">
+    <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" style="cursor: pointer" (click)="onRandomPokemon()">
-          <span style="margin-right: 10px">{{
-            constant.menu.RANDOM_POKEMON | translate
-          }}</span>
-          <img src="../../assets/img/random-logo.png" style="width: 50px"
-        /></a>
+        <button
+          mat-raised-button
+          color="warn"
+          class="mr-2"
+          (click)="onRandomPokemon()"
+        >
+          {{ constant.menu.RANDOM_POKEMON | translate }}
+        </button>
+        <img src="../../assets/img/random-logo.png" style="width: 50px" />
       </li>
     </ul>
   </div>
