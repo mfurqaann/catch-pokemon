@@ -7,6 +7,8 @@
     "MENU" : {
         "ALL_POKEMON": "All Pokemon",
         "MY_POKEMON": "My Pokemon",
-        "RANDOM_POKEMON": "Random Pokemon"
+        "RANDOM_POKEMON": "Random Pokemon",
+        "SWITCH_LANGUAGE": "Switch Language"
+
     }
 }
