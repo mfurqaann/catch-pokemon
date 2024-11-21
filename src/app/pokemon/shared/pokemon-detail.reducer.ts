@@ -45,6 +45,14 @@ export const actions = {
     `[${featureName} FETCH_MOVES_FAILED]`,
     props<{ payload: any }>()
   ),
+  onCatchPokemon: createAction(
+    `[${featureName} CATCH_POKEMON]`,
+    props<{ payload: { id: any } }>()
+  ),
+  onCatchPokemonSuccess: createAction(
+    `[${featureName} CATCH_POKEMON_SUCCESS]`,
+    props<{ payload: any }>()
+  ),
 };
 
 export const pokemonDetailReducer = createReducer(
@@ -69,7 +77,14 @@ export const pokemonDetailReducer = createReducer(
     ...state,
     error: payload.error,
   })),
-  on(actions.fetchMoves, (state) => ({
+  on(actions.fetchMovesSuccess, (state, { payload }) => ({
+    ...state,
+    selectedPokemon: {
+      ...state.selectedPokemon,
+      moves: payload.moves,
+    },
+  })),
+  on(actions.onCatchPokemonSuccess, (state, { payload }) => ({
     ...state,
   }))
 );
@@ -83,4 +98,5 @@ const getStateBy = (fn: (_: AppStateDetail) => any) =>
   createSelector(getState, fn);
 
 export const getPokemonDetail = getStateBy((state) => state.selectedPokemon);
-export const getMoves = getStateBy((state) => state.selectedPokemon.moves);
+export const getMoves = getStateBy((state) => state.selectedPokemon?.moves);
+export const getLoading = getStateBy((state) => state.loading);

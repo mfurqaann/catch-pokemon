@@ -13,7 +13,7 @@
   <nav *ngIf="(loading$ | async) === false">
     <ul class="pagination justify-content-center">
       <li class="page-item" [class.disabled]="(page | async).previous === null">
-        <a class="page-link">Previous</a>
+        <a class="page-link" (click)="onPreviousPage()">Previous</a>
       </li>
       <li class="page-item" [class.disabled]="(page | async).next === null">
         <a class="page-link" (click)="onNextPage()">Next</a>

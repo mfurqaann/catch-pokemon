@@ -41,6 +41,16 @@ export class PokemonComponent implements OnInit {
     this.store.dispatch(actions.fetchAction({ payload: newPagination }));
   }
 
+  onPreviousPage() {
+    this.pagination = {
+      offset: this.pagination.offset - 20,
+      limit: 20,
+    };
+    const newPagination = this.pagination;
+
+    this.store.dispatch(actions.fetchAction({ payload: newPagination }));
+  }
+
   private initStoreStreams() {
     this.pokemons$ = this.store.pipe(select(fromPokemon.getPokemons));
     this.loading$ = this.store.pipe(select(fromPokemon.getLoading));

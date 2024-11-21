@@ -1,9 +1,5 @@
-<ng-container
-  *ngIf="pokemonDetail$ | async as pokemonDetailObs; else loadingError"
->
+<ng-container *ngIf="pokemonDetail$ | async as pokemonDetail">
   <div class="container">
-    <mat-spinner class="mx-auto" *ngIf="loading"></mat-spinner>
-
     <!-- Modal -->
     <div
       class="modal fade"
@@ -16,7 +12,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">
-              {{ pokemonDetailObs.name | uppercase }} Has Been Caught!
+              {{ pokemonDetail.name | uppercase }} Has Been Caught!
             </h5>
             <button
               type="button"
@@ -52,7 +48,7 @@
     </div>
 
     <div
-      *ngIf="!loading && pokemonDetail$ | async as pokemonDetail"
+      *ngIf="pokemonDetail$ | async as pokemonDetail"
       id="carouselExampleControls"
       class="carousel slide"
       data-ride=""
@@ -108,7 +104,7 @@
       </a>
     </div>
 
-    <div *ngIf="!loading">
+    <div>
       <h3 class="text-center">Detail</h3>
 
       <mat-tab-group>
@@ -123,24 +119,24 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let pokemonMove of pokemonMoves">
-                  <td *ngIf="pokemonMove.accuracy" scope="row">
-                    {{ pokemonMove.name | uppercase }}
+                <tr *ngFor="let move of moves$ | async">
+                  <td *ngIf="move.accuracy" scope="row">
+                    {{ move.name | uppercase }}
                   </td>
-                  <td *ngIf="pokemonMove.accuracy">
-                    <span>{{ pokemonMove.accuracy }}</span>
+                  <td *ngIf="move.accuracy">
+                    <span>{{ move.accuracy }}</span>
                     <mat-progress-bar
                       style="width: 300px"
                       mode="determinate"
-                      [value]="pokemonMove.accuracy"
+                      [value]="move.accuracy"
                     ></mat-progress-bar>
                   </td>
-                  <td *ngIf="pokemonMove.power">
-                    <span>{{ pokemonMove.power }}</span>
+                  <td *ngIf="move.power">
+                    <span>{{ move.power }}</span>
                     <mat-progress-bar
                       style="width: 300px"
                       mode="determinate"
-                      [value]="pokemonMove.power"
+                      [value]="move.power"
                     ></mat-progress-bar>
                   </td>
                 </tr>
@@ -161,10 +157,10 @@
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row">{{ pokemonDetailObs.name | uppercase }}</th>
-                  <td>{{ pokemonDetailObs.height }}</td>
-                  <td>{{ pokemonDetailObs.weight }}</td>
-                  <td>{{ pokemonDetailObs.type | uppercase }}</td>
+                  <th scope="row">{{ pokemonDetail.name | uppercase }}</th>
+                  <td>{{ pokemonDetail.height }}</td>
+                  <td>{{ pokemonDetail.weight }}</td>
+                  <td>{{ pokemonDetail.type | uppercase }}</td>
                 </tr>
               </tbody>
             </table>
@@ -174,5 +170,4 @@
     </div>
   </div>
 </ng-container>
-
-<ng-template #loadingError> Error nih </ng-template>
+<mat-spinner class="mx-auto" *ngIf="loading$ | async"></mat-spinner>

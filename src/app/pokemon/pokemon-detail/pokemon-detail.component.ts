@@ -22,6 +22,8 @@ export class PokemonDetailComponent implements OnInit, OnDestroy {
   pokemonSubscription: Subscription = new Subscription();
 
   pokemonDetail$: Observable<PokemonDetail>;
+  loading$: Observable<boolean>;
+  moves$: Observable<Array<Move>>;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,9 +34,6 @@ export class PokemonDetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.pokemonDetailService.loading$.subscribe((value) => {
-      this.loading = value;
-    }); // bikin effect di service
     this.route.params.subscribe((params: Params) => {
       if (+params['id']) {
         this.id = +params['id'];
@@ -81,6 +80,10 @@ export class PokemonDetailComponent implements OnInit, OnDestroy {
         this.pokemonService.catchedPokemons.push(response);
       }
     });
+
+    this.store.dispatch(
+      fromPokemonDetail.actions.onCatchPokemon({ payload: { id } })
+    );
   }
 
   isDuplicate(catchedPokemons: any, response: any) {
@@ -113,19 +116,11 @@ export class PokemonDetailComponent implements OnInit, OnDestroy {
   //   this.fetchMove();
   // }
 
-  private fetchMove() {
-    this.pokemonMoves = [];
-
-    this.pokemonDetail.moves.map((move) => {
-      this.pokemonDetailService.fetchMove(move.url).subscribe((move) => {
-        this.pokemonMoves.push(move);
-      });
-    });
-  }
-
   private initStoreStreams() {
     this.pokemonDetail$ = this.store.pipe(
       select(fromPokemonDetail.getPokemonDetail)
     );
+    this.loading$ = this.store.pipe(select(fromPokemonDetail.getLoading));
+    this.moves$ = this.store.pipe(select(fromPokemonDetail.getMoves));
   }
 }

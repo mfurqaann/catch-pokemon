@@ -64,6 +64,19 @@ export class PokemonDetailEffect {
     );
   });
 
+  // onCatchPokemon: Observable<Action> = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(fromPokemonDetail.actions.onCatchPokemon),
+  //     switchMap((action) => {
+  //       return this.serviceDetail.catchPokemon(action.payload.id).pipe(
+  //         switchMap((val : any) => {
+  //           of(fromPokemonDetail.actions.onCatchPokemon)
+  //         })
+  //       )
+  //     })
+  //   )
+  // })
+
   constructor(
     private actions$: Actions,
     private serviceDetail: PokemonDetailService,

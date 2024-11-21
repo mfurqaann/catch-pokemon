@@ -12,18 +12,21 @@ export class PokemonDetailService {
 
   constructor(private http: HttpClient) {}
 
-  get loading(): Observable<boolean> {
-    return this.loading$.asObservable();
-  }
+  // get loading(): Observable<boolean> {
+  //   return this.loading$.asObservable();
+  // }
 
   fetchDetail(id: number): Observable<any> {
-    this.loading$.next(true);
-    return this.http
-      .get(`${this.urlPokemon}${id}`)
-      .pipe(finalize(() => this.loading$.next(false)));
+    // this.loading$.next(true);
+    return this.http.get(`${this.urlPokemon}${id}`);
   }
 
   fetchMove(url: string): Observable<any> {
+    return this.http.get(url);
+  }
+
+  catchPokemon(id: number) {
+    const url = `${EndpointConstant.POKEMON_URL}${EndpointConstant.FETCH_POKEMON}${id}`;
     return this.http.get(url);
   }
 }

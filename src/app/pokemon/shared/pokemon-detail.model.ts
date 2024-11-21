@@ -1,6 +1,8 @@
 export interface Move {
   name: string;
   url: string;
+  accuracy: number;
+  power: number;
 }
 
 export class PokemonDetail {
