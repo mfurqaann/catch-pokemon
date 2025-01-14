@@ -1,34 +1,23 @@
 <h1 class="text-center">{{ constant.label.CATCH_YOUR_POKEMON | translate }}</h1>
 <div style="margin-bottom: 200px">
-  <div class="row justify-content-center align-items-center">
+  <div class="tw-flex tw-flex-row tw-flex-wrap tw-justify-center tw-items-center tw-gap-4">
     <mat-spinner *ngIf="loading"></mat-spinner>
-    <ng-container *ngIf="!loading">
-      <app-pokemon-item
-        *ngFor="let pokemon of pokemons; let i = index"
-        [pokemon]="pokemon"
-        [index]="i"
-      ></app-pokemon-item>
-    </ng-container>
+    <div class="md:tw-grid md:tw-grid-cols-4 md:tw-gap-6">
+      <ng-container *ngIf="!loading">
+        <app-pokemon-item *ngFor="let pokemon of pokemons; let i = index" [pokemon]="pokemon"
+          [index]="i"></app-pokemon-item>
+      </ng-container>
+    </div>
   </div>
   <nav *ngIf="!loading">
     <ul class="pagination justify-content-center">
       <li class="page-item mr-2" [class.disabled]="isFirstPage">
-        <button
-          mat-raised-button
-          color="primary"
-          class="page-link"
-          (click)="previousPage()"
-        >
+        <button mat-raised-button color="primary" class="page-link" (click)="previousPage()">
           Previous
         </button>
       </li>
       <li class="page-item" [class.disabled]="isLastPage">
-        <button
-          class="page-link"
-          mat-raised-button
-          color="accent"
-          (click)="nextPage()"
-        >
+        <button class="page-link" mat-raised-button color="accent" (click)="nextPage()">
           Next
         </button>
       </li>

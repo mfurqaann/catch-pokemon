@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style filess */
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
     --bg-poke-color-light-grass: rgba(170, 209, 94, 0.5);
