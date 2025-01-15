@@ -56,7 +56,7 @@
                    [matAutocomplete]="auto"
                    #autoInput
                    >
-            <mat-autocomplete class="tw-w-8" #auto="matAutocomplete" (optionSelected)="optionSelected($event, autoInput)">
+            <mat-autocomplete class="tw-w-8" #auto="matAutocomplete" [autoActiveFirstOption]="true" [autoSelectActiveOption]="false" (optionSelected)="optionSelected($event, autoInput)">
               <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                 {{option | lowercase}}
               </mat-option>

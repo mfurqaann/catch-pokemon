@@ -48,6 +48,10 @@ export class PokemonService {
   }
 
   getPokemonbyName(name: string) {
-    return this.http.get(`ttps://pokeapi.co/api/v2/pokemon/${name}`)
+    return this.http.get(`${EndpointConstant.POKEMON_URL}/${EndpointConstant.FETCH_POKEMON}${name}`)
+  }
+
+  getAllPokemon() {
+    return this.http.get(`${EndpointConstant.POKEMON_URL}${EndpointConstant.FETCH_POKEMON}?limit=1000`)
   }
 }
