@@ -72,14 +72,14 @@ export class PokemonDetailComponent implements OnInit, OnDestroy {
   }
 
   onCatchPokemon(id: number) {
-    const catchedPokemons = this.pokemonService.catchedPokemons;
+    // const catchedPokemons = this.pokemonService.catchedPokemons;
 
-    this.pokemonService.catchPokemon(id).subscribe((response: any) => {
-      const isDuplicate = this.isDuplicate(catchedPokemons, response);
-      if (!isDuplicate) {
-        this.pokemonService.catchedPokemons.push(response);
-      }
-    });
+    // this.pokemonService.catchPokemon(id).subscribe((response: any) => {
+    //   const isDuplicate = this.isDuplicate(catchedPokemons, response);
+    //   if (!isDuplicate) {
+    //     this.pokemonService.catchedPokemons.push(response);
+    //   }
+    // });
 
     this.store.dispatch(
       fromPokemonDetail.actions.onCatchPokemon({ payload: { id } })

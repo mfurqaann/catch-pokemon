@@ -18,6 +18,7 @@ import * as fromPokemonDetail from '../shared/pokemon-detail.reducer';
 import { PokemonDetailService } from './pokemon-detail.service';
 import { Move, PokemonDetail } from './pokemon-detail.model';
 import { AppState } from 'src/app/app.reducer';
+import { BaseResponsePokemon } from './pokemon.model';
 
 @Injectable()
 export class PokemonDetailEffect {
@@ -69,13 +70,42 @@ export class PokemonDetailEffect {
   //     ofType(fromPokemonDetail.actions.onCatchPokemon),
   //     switchMap((action) => {
   //       return this.serviceDetail.catchPokemon(action.payload.id).pipe(
-  //         switchMap((val : any) => {
-  //           of(fromPokemonDetail.actions.onCatchPokemon)
+  //         switchMap((val: BaseResponsePokemon) => {
+  //           return [
+  //             fromPokemonDetail.actions.onCatchPokemonSuccess({
+  //               payload: {
+  //                 id: val.id,
+  //                 name: val.name,
+  //                 sprites: val.sprites,
+  //                 types: val.types[0].type.name,
+  //               },
+  //             }),
+  //           ];
   //         })
-  //       )
+  //       );
   //     })
-  //   )
-  // })
+  //   );
+  // });
+
+  onCatchPokemon: Observable<Action> = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(fromPokemonDetail.actions.onCatchPokemon),
+      switchMap((action) =>
+        this.serviceDetail.catchPokemon(action.payload.id).pipe(
+          map((val: BaseResponsePokemon) =>
+            fromPokemonDetail.actions.onCatchPokemonSuccess({
+              payload: {
+                id: val.id,
+                name: val.name,
+                sprites: val.sprites,
+                types: val.types[0].type.name,
+              },
+            })
+          )
+        )
+      )
+    );
+  });
 
   constructor(
     private actions$: Actions,

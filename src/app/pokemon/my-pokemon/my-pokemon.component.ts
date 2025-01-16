@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../shared/pokemon.service';
 import { BaseResponsePokemon } from '../shared/pokemon.model';
+import { Store, select } from '@ngrx/store';
+import * as fromPokemonDetail from '../shared/pokemon-detail.reducer';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-my-pokemon',
@@ -9,10 +12,12 @@ import { BaseResponsePokemon } from '../shared/pokemon.model';
 })
 export class MyPokemonComponent implements OnInit {
   catchedPokemons: Array<BaseResponsePokemon> = [];
-  constructor(private pokemonService: PokemonService) {}
+  catchedPokemons$: Observable<Array<BaseResponsePokemon>>;
+  constructor(private pokemonService: PokemonService, private store: Store) {}
 
   ngOnInit(): void {
     this.onMyPokemon();
+    this.initStoreStreams();
   }
 
   get myPokemonCount(): number {
@@ -37,6 +42,12 @@ export class MyPokemonComponent implements OnInit {
           types: catchedPokemon.types[0].type.name,
         });
       }
+    );
+  }
+
+  private initStoreStreams() {
+    this.catchedPokemons$ = this.store.pipe(
+      select(fromPokemonDetail.getCatchedPokemons)
     );
   }
 }

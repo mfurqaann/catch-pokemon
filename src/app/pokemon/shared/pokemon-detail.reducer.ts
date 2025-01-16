@@ -8,6 +8,7 @@ import {
   props,
 } from '@ngrx/store';
 import { Move, PokemonDetail } from './pokemon-detail.model';
+import { BaseResponsePokemon } from './pokemon.model';
 
 export const featureName = 'pokemonDetail';
 
@@ -15,12 +16,14 @@ export interface AppStateDetail {
   selectedPokemon: PokemonDetail;
   loading: boolean;
   error: string;
+  catchedPokemon: Array<BaseResponsePokemon>;
 }
 
 export const initialState: AppStateDetail = {
   selectedPokemon: null,
   loading: false,
   error: null,
+  catchedPokemon: null,
 };
 
 export const actions = {
@@ -51,7 +54,7 @@ export const actions = {
   ),
   onCatchPokemonSuccess: createAction(
     `[${featureName} CATCH_POKEMON_SUCCESS]`,
-    props<{ payload: any }>()
+    props<{ payload: BaseResponsePokemon }>()
   ),
 };
 
@@ -86,6 +89,7 @@ export const pokemonDetailReducer = createReducer(
   })),
   on(actions.onCatchPokemonSuccess, (state, { payload }) => ({
     ...state,
+    catchedPokemon: [...(state.catchedPokemon || []), payload],
   }))
 );
 
@@ -100,3 +104,7 @@ const getStateBy = (fn: (_: AppStateDetail) => any) =>
 export const getPokemonDetail = getStateBy((state) => state.selectedPokemon);
 export const getMoves = getStateBy((state) => state.selectedPokemon?.moves);
 export const getLoading = getStateBy((state) => state.loading);
+export const getCatchedPokemons = getStateBy((state) => state.catchedPokemon);
+export const getCatchedPokemonsCount = getStateBy(
+  (state) => state.catchedPokemon.length
+);
