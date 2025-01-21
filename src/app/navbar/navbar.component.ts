@@ -6,7 +6,7 @@ import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map, Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { BaseResponse, PokemonItem } from '../pokemon/shared/pokemon.model';
-import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { PokemonService } from '../pokemon/shared/pokemon.service';
 
 @Component({
@@ -16,7 +16,7 @@ import { PokemonService } from '../pokemon/shared/pokemon.service';
 })
 export class NavbarComponent implements OnInit {
   myControl = new FormControl('');
-  options: Array<string> = []
+  options: Array<string> = [];
   filteredOptions: Observable<Array<string>>;
   allPokemon: any;
   readonly constant = {
@@ -38,29 +38,35 @@ export class NavbarComponent implements OnInit {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       debounceTime(300),
       distinctUntilChanged(),
-      map(value => this._filter(value || ''))
-    )
+      map((value) => this._filter(value || ''))
+    );
   }
 
-  private _filter(value: string): Array<string>{
+  private _filter(value: string): Array<string> {
     const filterValue = value.toLowerCase();
-    return this.options?.filter(option => option.toLowerCase().includes(filterValue));
+    return this.options?.filter((option) =>
+      option.toLowerCase().includes(filterValue)
+    );
   }
 
   optionSelected(e: MatAutocompleteSelectedEvent, ele: HTMLInputElement) {
-    this.pokemonService.getPokemonbyName(e.option.value).subscribe((val: PokemonItem) => {
-      this.router.navigateByUrl(`/all-pokemon/${val.id}`);
-    })
+    this.pokemonService
+      .getPokemonbyName(e.option.value)
+      .subscribe((val: PokemonItem) => {
+        this.router.navigateByUrl(`/all-pokemon/${val.id}`);
+      });
     ele.value = '';
     this.autoComplete.nativeElement.blur();
   }
 
   getPokemon() {
-    this.pokemonService.getAllPokemon().subscribe((allPokemon: BaseResponse) => {
-      allPokemon.results.map((pokemon) => {
-        this.options.push(pokemon?.name)
-      })
-    })
+    this.pokemonService
+      .getAllPokemon()
+      .subscribe((allPokemon: BaseResponse) => {
+        allPokemon.results.map((pokemon) => {
+          this.options.push(pokemon?.name);
+        });
+      });
   }
 
   onRandomPokemon() {

@@ -47,22 +47,32 @@
         <form>
           <mat-form-field class="tw-w-full">
             <mat-label>Pokemon Name</mat-label>
-            <input type="text"
-                   placeholder="Search..."
-                   aria-label="Pokemon Name"
-                   class="tw-h-3 tw-w-8"
-                   matInput
-                   [formControl]="myControl"
-                   [matAutocomplete]="auto"
-                   #autoInput
-                   >
-            <mat-autocomplete class="tw-w-8" #auto="matAutocomplete" [autoActiveFirstOption]="true" [autoSelectActiveOption]="false" (optionSelected)="optionSelected($event, autoInput)">
-              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                {{option | lowercase}}
+            <input
+              type="text"
+              placeholder="Search..."
+              aria-label="Pokemon Name"
+              class="tw-h-3 tw-w-8"
+              matInput
+              [formControl]="myControl"
+              [matAutocomplete]="auto"
+              #autoInput
+            />
+            <mat-autocomplete
+              class="tw-w-8"
+              #auto="matAutocomplete"
+              [autoActiveFirstOption]="true"
+              [autoSelectActiveOption]="false"
+              (optionSelected)="optionSelected($event, autoInput)"
+            >
+              <mat-option
+                *ngFor="let option of filteredOptions | async"
+                [value]="option"
+              >
+                {{ option | lowercase | capitalize }}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
-        </form>   
+        </form>
       </li>
       <li class="nav-item">
         <button

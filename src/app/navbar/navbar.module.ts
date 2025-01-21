@@ -12,35 +12,34 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { PokemonService } from '../pokemon/shared/pokemon.service';
+import { CapitalizePipe } from '../common/pipe/capitalize.pipe';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-  declarations: [
-    NavbarComponent
-  ],
+  declarations: [NavbarComponent, CapitalizePipe],
   imports: [
     CommonModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     TranslateModule.forRoot({
-        loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient],
-        },
-      }),
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     MatButtonModule,
     MatAutocompleteModule,
     MatFormFieldModule,
     FormsModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports: [NavbarComponent],
-  providers: [PokemonService]
+  providers: [PokemonService],
 })
 export class NavbarModule {}
