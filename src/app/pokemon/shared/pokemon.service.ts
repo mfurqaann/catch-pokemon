@@ -46,4 +46,12 @@ export class PokemonService {
     const url = `${EndpointConstant.POKEMON_URL}${EndpointConstant.FETCH_POKEMON}${id}`;
     return this.http.get(url);
   }
+
+  getPokemonbyName(name: string) {
+    return this.http.get(`${EndpointConstant.POKEMON_URL}/${EndpointConstant.FETCH_POKEMON}${name}`)
+  }
+
+  getAllPokemon() {
+    return this.http.get(`${EndpointConstant.POKEMON_URL}${EndpointConstant.FETCH_POKEMON}?limit=1000`)
+  }
 }
