@@ -1,27 +1,57 @@
-# CatchPokemon
+# 🎮 Catch Your Pokemon
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.10.
+**Catch Your Pokemon** is an interactive web application that allows users to browse, view details, and catch their favorite Pokémon. This project was built as a personal practice to develop a modern frontend application using Angular, Material UI, and TailwindCSS.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🔧 Tech Stack
 
-## Code scaffolding
+- ⚙️ **Angular** — Main framework for building the app
+- 🎨 **Material UI** — Ready-to-use UI components
+- 💨 **TailwindCSS** — Utility-first CSS framework for styling
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## ✨ Main Features
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- 🏠 **Home Page**  
+  Displays a list of Pokémon that users can browse and select.
 
-## Running unit tests
+- 📖 **Detail Page**  
+  Shows complete details of the selected Pokémon and includes a button to catch it.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- 📦 **My Pokémon Page**  
+  Displays a list of Pokémon successfully caught by the user.
 
-## Running end-to-end tests
+- 🔍 **Search Pokémon**  
+  Users can search for Pokémon by name using the search feature.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- 🌐 **Language Switcher**  
+  A toggle that lets users switch between English and Bahasa Indonesia.
 
-## Further help
+---
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## 🌐 Language Support
+
+- 🇬🇧 English  
+- 🇮🇩 Bahasa Indonesia  
+
+Users can easily switch languages from any page via the language toggle button.
+
+---
+
+## 📦 How to Run the Project
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/username/catch-your-pokemon.git
+cd catch-your-pokemon
+
+# 2. Install dependencies
+npm install
+
+# 3. Run the app
+ng serve
+
+# 4. Open the app in your browser
+http://localhost:4200
