@@ -55,3 +55,24 @@ ng serve
 
 # 4. Open the app in your browser
 http://localhost:4200
+```
+
+## 📁 Project Structure
+```bash
+└── src/
+    ├── app/
+    │   ├── common/
+    │   │   ├── constant # Constant values (e.g. API URLs, labels and menus)
+    │   │   └── pipe # Custom pipes (e.g. capitalize)
+    │   └── pokemon/
+    │       ├── my-pokemon # Page for displaying caught Pokémon
+    │       ├── pokemon-item # Reusable component for listing Pokémon
+    │       ├── pokemon-detail # Page showing detailed Pokémon info
+    │       └── shared/ # Shared services related to Pokémon
+    │           ├── pokemon-detail.service
+    │           └── pokemon.service
+    ├── assets/
+    │   ├── i18n # Language translation files (for i18n)
+    │   └── img # Static image assets
+    └── styles # Global styles and Tailwind configuration
+```
